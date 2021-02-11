@@ -5,6 +5,7 @@
     {% for each in news %}
     <div>
       <h1>{{ each.title }}</h1>
+      <p>{{ each.category.name }}</p>
       <p>{{ each.content }}</p>
     </div>
     {% endfor %}
