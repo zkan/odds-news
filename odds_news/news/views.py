@@ -1,8 +1,29 @@
+import json
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 
 from news.models import News
+
+
+class NewsAPIView(View):
+    def get(self, request):
+        news = News.objects.all()
+
+        data = []
+        for each in news:
+            item = {
+                'title': each.title,
+                'content': each.content,
+                'category': each.category.name,
+            }
+            data.append(item)
+
+        return HttpResponse(
+            json.dumps(data),
+            content_type='application/json'
+        )
 
 
 class NewsView(View):
